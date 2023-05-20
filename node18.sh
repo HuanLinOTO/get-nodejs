@@ -10,17 +10,19 @@ read -r -p "Do you want to append path /opt/node-v18.16.0-linux-x64/bin/ to all 
 case $input in
     [yY][eE][sS]|[yY])
 		for file in $(find ~ -maxdepth 1 -name ".*rc"); do
-      echo "Append to $file"
-      echo "export PATH=/opt/node-v18.16.0-linux-x64/bin/:\$PATH" >> $file
-    done
-		;;
+            echo "Append to $file"
+            echo "export PATH=/opt/node-v18.16.0-linux-x64/bin/:\$PATH" >> $file
+        done
+        echo "Restarting Shell"
+        exec $SHELL -l
+    ;;
 
     [nN][oO]|[nN])
-		  echo "Ok, see you next time"
+        echo "Ok, see you next time"
     ;;
 
     *)
-		  echo "Invalid input... Good bye."
-		  exit 1
-		;;
+        echo "Invalid input... Good bye."
+        exit 1
+    ;;
 esac
